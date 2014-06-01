@@ -2,21 +2,80 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Main</title>
-
+    <title>
+        Main
+    </title>
     <link rel="stylesheet" href="main.css">
-
     <script type="text/montage-serialization">
-        {
-            "owner": {
-                "properties": {
-                    "element": {"#": "main"}
+    {
+        "owner": {
+            "properties": {
+                "element": {"#": "main"}
+            }
+        },
+        "actionEventListener": {
+            "prototype": "montage/core/event/action-event-listener",
+            "properties": {
+                "action": "addContent",
+                "handler": {"@": "rangeController"}
+            },
+            "_dev": {
+                "isHidden": true
+            }
+        },
+        "button": {
+            "prototype": "digit/ui/button.reel",
+            "properties": {
+                "element": {"#": "button"},
+                "enabled": true,
+                "label": "Button"
+            },
+            "listeners": [
+                {
+                    "type": "action",
+                    "listener": {"@": "actionEventListener"}
                 }
+            ]
+        },
+        "detail": {
+            "prototype": "ui/detail.reel",
+            "properties": {
+                "element": {"#": "detail"}
+            },
+            "bindings": {
+                "object": {"<-": "@rangeController.selection.one"}
+            }
+        },
+        "item1": {
+            "prototype": "ui/item.reel",
+            "properties": {
+                "element": {"#": "item1"}
+            },
+            "bindings": {
+                "object": {"<-": "@repetition:iteration.object"}
+            }
+        },
+        "rangeController": {
+            "prototype": "montage/core/range-controller"
+        },
+        "repetition": {
+            "prototype": "montage/ui/repetition.reel",
+            "properties": {
+                "element": {"#": "repetition"},
+                "contentController": {"@": "rangeController"},
+                "isSelectionEnabled": true
             }
         }
+    }
     </script>
 </head>
 <body>
-    <div data-montage-id="main" data-montage-skin="light" class="Main"></div>
+    <div data-montage-id="main" data-montage-skin="light" class="Main">
+        <ul data-montage-id="repetition">
+            <li data-montage-id="item1"></li>
+        </ul>
+        <button data-montage-id="button"></button>
+        <div data-montage-id="detail"></div>
+    </div>
 </body>
 </html>
