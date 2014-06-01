@@ -9,12 +9,23 @@
             "properties": {
                 "element": {"#": "owner"}
             }
+        },
+        "textField": {
+            "prototype": "digit/ui/text-field.reel",
+            "properties": {
+                "element": {"#": "textField"},
+                "placeholderValue": "Text"
+            },
+            "bindings": {
+                "value": {"<->": "@owner.object.title"}
+            }
         }
     }
     </script>
 </head>
 <body>
     <div data-montage-id="owner" class="Item">
+        <input data-montage-id="textField" type="text">
     </div>
 </body>
 </html>
